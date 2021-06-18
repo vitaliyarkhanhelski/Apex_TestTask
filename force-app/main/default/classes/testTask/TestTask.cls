@@ -42,7 +42,7 @@ public with sharing class TestTask {
         return false;
     }
 
-     private static void populateValuesToMap(Integer i, Boolean isPositive) {
+    private static void populateValuesToMap(Integer i, Boolean isPositive) {
         if (isPositive) {
             populatePositiveMap(i);
         } else {
@@ -63,7 +63,7 @@ public with sharing class TestTask {
         }
     }
 
-        private static void populateNegativeMap(Integer i) {
+    private static void populateNegativeMap(Integer i) {
         Integer currentNumber = new List<Integer>(negatives.keySet())[0];
         if (i == currentNumber) {
             List<Integer> temp = negatives.get(i);
