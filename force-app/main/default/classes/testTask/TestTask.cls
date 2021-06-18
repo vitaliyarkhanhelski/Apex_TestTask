@@ -27,17 +27,13 @@ public with sharing class TestTask {
     }
 
     private static Boolean checkIfMapsAreEmpty(Integer i) {
-        if (positives.isEmpty()) {
-            if (i > 0) {
-                positives.put(i, new List<Integer>{i});
-                return true;
-            } 
+        if (positives.isEmpty() && i > 0) {
+            positives.put(i, new List<Integer>{i});
+            return true;
         }
-        if (negatives.isEmpty()) {
-            if (i < 0) {
-                negatives.put(i, new List<Integer>{i});
-                return true;
-            }
+        if (negatives.isEmpty() && i < 0) {
+            negatives.put(i, new List<Integer>{i});
+            return true;
         }
         return false;
     }
@@ -77,10 +73,10 @@ public with sharing class TestTask {
     }
 
     private static List<Integer> prepareResultList() {
-        Integer positive = ( new List<Integer> ( positives.keySet() ) )[0];
-        Integer negative = ( new List<Integer> ( negatives.keySet() ) )[0];
-        List<Integer> positiveResult = positives.get(positive);
-        List<Integer> negativeResult = negatives.get(negative);
+        Integer positive =  !positives.keySet().isEmpty() ? new List<Integer> ( positives.keySet() ) [0] : null;
+        Integer negative =  !negatives.keySet().isEmpty() ? new List<Integer> ( negatives.keySet() ) [0] : null;
+        List<Integer> positiveResult = positive != null ? positives.get(positive) : new List<Integer>();
+        List<Integer> negativeResult = negative != null ? negatives.get(negative) : new List<Integer>();
         List<Integer> result = new List<Integer>(positiveResult);
         result.addAll(negativeResult);
         return result;
